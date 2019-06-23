@@ -21,7 +21,7 @@ public class Main extends Frame implements ActionListener,  WindowListener {
     private String question;
     private String lastCommand;       	    //保存+, -, *, /, =命令0
     private double ans;           	  	  //保存计算结果
-    private boolean start, flg, fi;         //判断是否为数字的开始
+    private boolean start = true, flg = false;         //判断是否为数字的开始
     private int cnt;
    
     public Main() {      //构造方法设置布局、为按钮注册事件监听器
@@ -188,7 +188,7 @@ public class Main extends Frame implements ActionListener,  WindowListener {
         	String command = e.getActionCommand();        
         	String tmp = displayField.getText();
 
-        	System.out.println("question_2:  " + tmp);
+//        	System.out.println("question_2:  " + tmp);
         	double now = Lib.calc(tmp);
         	
         	if (command.equals("sqrt")) now = Math.sqrt(now);
@@ -206,7 +206,7 @@ public class Main extends Frame implements ActionListener,  WindowListener {
         	question = question + lastCommand + now;
         	
         	ans = Lib.calc(question);
-        	System.out.println("question_1:  " + question);
+//        	System.out.println("question_1:  " + question);
         	displayField.setText("" + ans);
         	
         	start = true;
@@ -222,9 +222,9 @@ public class Main extends Frame implements ActionListener,  WindowListener {
             	questionField.setText(questionField.getText() + lastCommand + displayField.getText());
                 question = question + lastCommand + displayField.getText();
 
-            	System.out.println("question_3:  " + question);
+//            	System.out.println("question_3:  " + question);
                 ans = Lib.calc(question);
-                System.out.println(ans);
+//                System.out.println(ans);
                 displayField.setText("" + ans);
                 lastCommand = command;
                 start = true;
