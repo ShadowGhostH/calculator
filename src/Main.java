@@ -21,7 +21,7 @@ public class Main extends Frame implements ActionListener,  WindowListener {
     private String question;
     private String lastCommand;       	    //保存+, -, *, /, =命令0
     private double ans;           	  	  //保存计算结果
-    private boolean start, flg, rnw;         //判断是否为数字的开始
+    private boolean start, flg, fi;         //判断是否为数字的开始
     private int cnt;
    
     public Main() {      //构造方法设置布局、为按钮注册事件监听器
@@ -187,6 +187,8 @@ public class Main extends Frame implements ActionListener,  WindowListener {
         	
         	String command = e.getActionCommand();        
         	String tmp = displayField.getText();
+
+        	System.out.println("question_2:  " + tmp);
         	double now = Lib.calc(tmp);
         	
         	if (command.equals("sqrt")) now = Math.sqrt(now);
@@ -195,6 +197,8 @@ public class Main extends Frame implements ActionListener,  WindowListener {
             else if (command.equals("tan")) now = Math.tan(now);
             else if (command.equals("cos")) now = Math.cos(now);
             else if (command.equals("sin")) now = Math.sin(now);
+            else if (command.equals("abs")) now = Math.abs(now);
+            else if (command.equals("int")) now = Math.floor(now);
         	
         	if(tmp.startsWith("(")) questionField.setText(questionField.getText() + lastCommand + command + tmp);
         	else questionField.setText(questionField.getText() + lastCommand + command + "(" + tmp + ")");
@@ -202,6 +206,7 @@ public class Main extends Frame implements ActionListener,  WindowListener {
         	question = question + lastCommand + now;
         	
         	ans = Lib.calc(question);
+        	System.out.println("question_1:  " + question);
         	displayField.setText("" + ans);
         	
         	start = true;
@@ -215,9 +220,11 @@ public class Main extends Frame implements ActionListener,  WindowListener {
             }
             else {
             	questionField.setText(questionField.getText() + lastCommand + displayField.getText());
-                rnw = false;
                 question = question + lastCommand + displayField.getText();
+
+            	System.out.println("question_3:  " + question);
                 ans = Lib.calc(question);
+                System.out.println(ans);
                 displayField.setText("" + ans);
                 lastCommand = command;
                 start = true;
@@ -227,7 +234,6 @@ public class Main extends Frame implements ActionListener,  WindowListener {
     
     public void init() {
     	start = true;
-        rnw = true;
         ans = 0;
         cnt = 0;
         lastCommand = "";
