@@ -1,13 +1,13 @@
 
 public class Lib {
 	
-	static private int getw(char c){
+	static public int getw(char c){
 		if(c=='*' || c=='/') return 2;
 		else return 1;
 	}
 	
-	static private double calced(double a, double b, char c) {
-		
+	static public double calced(double a, double b, char c) {
+//		System.out.println(a + "" +  c + b);
 		if(c == '+') return a + b;
 		else if(c == '-') return a - b;
 		else if(c == '*') return a * b;
@@ -16,7 +16,6 @@ public class Lib {
 	
 	/** 将question转化为后缀表达式并求值   **/
 	static public double calc(String question){
-		System.out.println("calc: " + question);
 		
 		char[] ch = new char[50];
 		char[] oc = new char[15]; 
@@ -29,9 +28,8 @@ public class Lib {
 		
 		
 		for(int i=0; i<ch.length; i++){
-//			System.out.println(i+ ":" + ch[i]);
-			if(!have_num && tmp == 0 && ch[i] == '-') {
-				System.out.println(i + " ** " + pm);
+			if((i == 0 || !(Character.isDigit(ch[i-1]) || ch[i-1] == ')')) && tmp == 0 && ch[i] == '-') {
+				System.out.println("****");
 				pm = true;
 			}
 			else if(Character.isDigit(ch[i]) || ch[i] == '.') {
@@ -85,7 +83,8 @@ public class Lib {
 			num[++pn] = calced(num2, num1, ch1);
 		}
 		
-		
+
+//		System.out.println("calc: " + question + " = " + num[0]);
 		return num[0];
 	}	
 }
