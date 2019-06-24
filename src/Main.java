@@ -191,9 +191,25 @@ public class Main extends Frame implements ActionListener,  WindowListener {
 //        	System.out.println("question_2:  " + tmp);
         	double now = Lib.calc(tmp);
         	
-        	if (command.equals("sqrt")) now = Math.sqrt(now);
+        	if (command.equals("sqrt")) {
+        		if(now < 0) {
+        			init();
+        			questionField.setText("负数不能开平方，请按C继续");
+        			displayField.setText("Error!");
+        			return ;
+        		}
+        		now = Math.sqrt(now);
+        	}
             else if (command.equals("exp")) now = Math.exp(now); 
-            else if (command.equals("ln"))  now = Math.log(now);
+            else if (command.equals("ln"))  {
+            	if(now < 0) {
+        			init();
+        			questionField.setText("负数不能取对数，请按C继续");
+        			displayField.setText("Error!");
+        			return ;
+        		}
+            	now = Math.log(now);
+            }
             else if (command.equals("tan")) now = Math.tan(now);
             else if (command.equals("cos")) now = Math.cos(now);
             else if (command.equals("sin")) now = Math.sin(now);
@@ -222,9 +238,7 @@ public class Main extends Frame implements ActionListener,  WindowListener {
             	questionField.setText(questionField.getText() + lastCommand + displayField.getText());
                 question = question + lastCommand + displayField.getText();
 
-//            	System.out.println("question_3:  " + question);
                 ans = Lib.calc(question);
-//                System.out.println(ans);
                 displayField.setText("" + ans);
                 lastCommand = command;
                 start = true;
